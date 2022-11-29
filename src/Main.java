@@ -10,9 +10,19 @@ import java.util.List;
 import java.util.Scanner;
 import src.data.Contact;
 
-import static java.nio.file.Files.write;
-
 public class Main {
+
+//    public ArrayList<Contact> parseToContacts(Path filename) throws IOException {
+//        List<String> lines = Files.readAllLines(filename);
+//        ArrayList<Contact> contacts = new ArrayList<>();
+//        for (int i = 0 ; i < lines.size(); i ++ ){
+//            String [] parts = lines.get(i).split(" ");
+//            contacts.add(new Contact(parts[1],Integer.parseInt((parts[2]))));
+//        }
+//        return contacts;
+//    }
+
+    private List<String> output;
 
     public Main() throws IOException {
 
@@ -28,7 +38,7 @@ public class Main {
         ArrayList<Contact> contacts = new ArrayList<>();
         Scanner input = new Scanner(System.in);
         boolean running = true;
-//        Files.writeString(dataFile,"dave 123456789");
+        output = Files.readAllLines(dataFile);
 
         while (running) {
             System.out.println("1. View Contacts");
@@ -38,40 +48,58 @@ public class Main {
             System.out.println("5. Exit");
             System.out.println("Enter an option (1, 2, 3, 4 or 5):");
             int choice = input.nextInt();
+            String choice2;
             switch (choice) {
                 case 1:
-//                    System.out.println("View contacts");
-                    List<String> output = Files.readAllLines(dataFile);
+                    output = Files.readAllLines(dataFile);
                     System.out.println(output);
-//                    for (int i = 0; i < output.size(); i++){
-//                        System.out.println(output.get(i));
-//                    }
+                    System.out.println();
                     break;
                 case 2:
-                    System.out.println("Add a new contact");
                     boolean addingContact =  true;
                     while (addingContact){
                         System.out.println("What is your contacts name?");
-                        String val1 = input.next();
+                        String val1 = input.next().toLowerCase();
                         System.out.println("What is your contact's phone number?");
-                        String val2 = input.next();
+                        String val2 = input.next().toLowerCase();
                         System.out.printf("Your contact is %s - %s? [y/n]",val1,val2);
-                        String choice2 = input.next();
+                        choice2 = input.next();
                         if (choice2.equalsIgnoreCase("y")){
                             Files.writeString(dataFile,(val1 + " " + val2 + "\n"), StandardOpenOption.APPEND);
                             addingContact = false;
                         }
                     }
+                    System.out.println();
                     break;
                 case 3:
-                    System.out.println("Search a contact by name");
+                    System.out.println("Please enter the name to search for");
+                    choice2 = input.next();
+                    choice2 = choice2.toLowerCase();
+                    for (int i = 0; i < output.size(); i++){
+                        if (output.get(i).contains(choice2)){
+                            System.out.println(output.get(i));
+                        }
+                    }
+                    System.out.println();
                     break;
                 case 4:
-                    System.out.println("Delete an existing contact");
+                    System.out.println("Please enter the name of the contact you wish to delete");
+                    choice2 = input.next();
+                    choice2 = choice2.toLowerCase();
+                    for (int i = 0; i < output.size(); i++){
+                        if (output.get(i).contains(choice2)){
+                            output.remove(i);
+                            Files.write(dataFile, output);
+
+//                            System.out.println(output.get(i));
+                        }
+                    }
+                    System.out.println();
                     break;
                 case 5:
                     System.out.println("Goodbye!");
                     running = false;
+                    System.out.println();
                     break;
                 default:
                     continue;
