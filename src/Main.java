@@ -1,10 +1,28 @@
-import java.util.HashMap;
+package src;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import src.data.Contact;
 
 public class Main {
 
-    public Main() {
-        HashMap<String, Contact> contacts = new HashMap<>();
+    public Main() throws IOException {
+
+        String directory = "data";
+        String filename = "contactList.txt";
+        Path dataDirectory = Paths.get(directory);
+        Path dataFile = Paths.get(directory, filename);
+        if (Files.notExists(dataDirectory)) {
+            Files.createDirectories(dataDirectory);}
+        if (! Files.exists(dataFile)) {
+            Files.createFile(dataFile);}
+
+        ArrayList<Contact> contacts = new ArrayList<>();
         Scanner input = new Scanner(System.in);
         boolean running = true;
 
@@ -18,7 +36,12 @@ public class Main {
             int choice = input.nextInt();
             switch (choice) {
                 case 1:
-                    System.out.println("View contacts");
+//                    System.out.println("View contacts");
+                    List<String> output = Files.readAllLines(dataFile);
+                    System.out.println(output);
+//                    for (int i = 0; i < output.size(); i++){
+//                        System.out.println(output.get(i));
+//                    }
                     break;
                 case 2:
                     System.out.println("Add a new contact");
@@ -39,7 +62,7 @@ public class Main {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Main m1 = new Main();
     }
 }

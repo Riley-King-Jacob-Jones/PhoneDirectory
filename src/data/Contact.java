@@ -1,3 +1,5 @@
+package src.data;
+
 public class Contact {
     private String name;
     private int number;
