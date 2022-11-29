@@ -18,16 +18,16 @@ public class Main {
             int choice = input.nextInt();
             switch (choice) {
                 case 1:
-                    System.out.println("Choice 1");
+                    System.out.println("View contacts");
                     break;
                 case 2:
-                    System.out.println("Choice 1");
+                    System.out.println("Add a new contact");
                     break;
                 case 3:
-                    System.out.println("Choice 1");
+                    System.out.println("Search a contact by name");
                     break;
                 case 4:
-                    System.out.println("Choice 1");
+                    System.out.println("Delete an existing contact");
                     break;
                 case 5:
                     System.out.println("Goodbye!");
