@@ -4,16 +4,19 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import src.data.Contact;
 
+import static java.nio.file.Files.write;
+
 public class Main {
 
     public Main() throws IOException {
 
-        String directory = "data";
+        String directory = "./src/data";
         String filename = "contactList.txt";
         Path dataDirectory = Paths.get(directory);
         Path dataFile = Paths.get(directory, filename);
@@ -25,6 +28,7 @@ public class Main {
         ArrayList<Contact> contacts = new ArrayList<>();
         Scanner input = new Scanner(System.in);
         boolean running = true;
+//        Files.writeString(dataFile,"dave 123456789");
 
         while (running) {
             System.out.println("1. View Contacts");
@@ -45,6 +49,19 @@ public class Main {
                     break;
                 case 2:
                     System.out.println("Add a new contact");
+                    boolean addingContact =  true;
+                    while (addingContact){
+                        System.out.println("What is your contacts name?");
+                        String val1 = input.next();
+                        System.out.println("What is your contact's phone number?");
+                        String val2 = input.next();
+                        System.out.printf("Your contact is %s - %s? [y/n]",val1,val2);
+                        String choice2 = input.next();
+                        if (choice2.equalsIgnoreCase("y")){
+                            Files.writeString(dataFile,(val1 + " " + val2 + "\n"), StandardOpenOption.APPEND);
+                            addingContact = false;
+                        }
+                    }
                     break;
                 case 3:
                     System.out.println("Search a contact by name");
