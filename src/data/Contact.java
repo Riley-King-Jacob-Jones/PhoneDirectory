@@ -1,8 +1,8 @@
 package src.data;
 
 public class Contact {
-    private String name;
-    private int number;
+    private final String name;
+    private final int number;
 
     public Contact(String name, int number){
         this.name=name;
@@ -13,15 +13,23 @@ public class Contact {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    @Override
+    public String toString(){
+        return String.format("%s %d",this.name, this.number);
     }
 
-    public int getNumber() {
-        return number;
+    public String toStringFormatted(){
+        return String.format("%s %s",this.name, this.formatNumber());
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public String formatNumber(){
+        String formattedNumber="";
+        String number = String.valueOf(this.number);
+        if (number.length()==8){
+            formattedNumber = (String.format("%s-%s-%s",number.substring(0,1),number.substring(1,4),number.substring(4,8)));
+        } else if (number.length()==7) {
+            formattedNumber = (String.format("%s-%s",number.substring(0,3),number.substring(3,7)));
+        }
+        return formattedNumber;
     }
 }
