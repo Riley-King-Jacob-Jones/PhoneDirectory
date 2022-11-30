@@ -18,8 +18,9 @@ public class Main {
         List<String> lines = Files.readAllLines(filename);
         ArrayList<Contact> contacts = new ArrayList<>();
         for (int i = 0 ; i < lines.size(); i ++ ){
-            String [] parts = lines.get(i).split(" ");
-            contacts.add(new Contact(parts[0],Integer.parseInt((parts[1]))));
+            String[] parts = lines.get(i).split(" ");
+            System.out.printf("%s %s \n", parts[0],parts[1]);
+            contacts.add(new Contact(parts[0],parts[1]));
         }
         return contacts;
     }
@@ -58,6 +59,7 @@ public class Main {
 
         //  Generate editable list of contact objects
         List<Contact> contacts = parseToContacts(dataFile);
+        contactsToString(contacts);
         boolean running = true;
         int choice;
         String choice2;
@@ -90,7 +92,6 @@ public class Main {
                             Files.writeString(dataFile,(val1 + " " + val2 + "\n"), StandardOpenOption.APPEND);
                             addingContact = false;
                         }
-                        //  TODO: Ask if user wants to attempt to add another contact, or quit program
                     }
                     System.out.println();
                     break;
@@ -106,7 +107,7 @@ public class Main {
                             System.out.println(contacts.get(i).toStringFormatted());
                             found = true;
                         }
-                        //  If name does not return a phone number
+                        //  If no contact was found
                         if (i == contacts.size()-1 && ! found){
                             System.out.println("i == contacts.size()");
                             System.out.printf("Sorry no contact named %s was found", choice2);
@@ -123,8 +124,12 @@ public class Main {
                     for (int i = 0; i < contacts.size(); i++){
                         // TODO: Are you sure you wish to delete Name | Number?
                         if (contacts.get(i).getName().contains(choice2)){
-                            contacts.remove(i);
-                            Files.writeString(dataFile, contactsToString(contacts));
+                            System.out.printf("Are you sure you want to delete\n%s?\n[y/N]",contacts.get(i).toStringFormatted());
+                            choice2 = input.next();
+                            if (choice2.equalsIgnoreCase("y") || choice2.equalsIgnoreCase("yes")){
+                                contacts.remove(i);
+                                Files.writeString(dataFile, contactsToString(contacts));
+                            }
                         }
                     }
                     System.out.println();
