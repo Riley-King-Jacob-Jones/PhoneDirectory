@@ -52,8 +52,14 @@ public class Main {
             switch (choice) {
                 case 1:
                     output = Files.readAllLines(dataFile);
-                    System.out.println(output);
-                    System.out.println();
+                    System.out.println("Name | Phone number");
+                    System.out.println("---------------");
+                    for (int i = 0; i < output.size(); i++){
+                        String[] broken = output.get(i).split(" ");
+                        System.out.printf("%s | %s\n",broken[0],broken[1]);
+                    }
+//                    System.out.println(output);
+//                    System.out.println();
                     break;
                 case 2:
                     boolean addingContact =  true;
