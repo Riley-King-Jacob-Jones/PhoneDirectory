@@ -15,18 +15,20 @@ public class Contact {
 
     @Override
     public String toString(){
-        return String.format("%s %d",this.name, this.number);
+        return String.format("%s | %d",this.name, this.number);
     }
 
     public String toStringFormatted(){
-        return String.format("%s %s",this.name, this.formatNumber());
+        return String.format("%10s | %10s",this.name, this.formatNumber());
     }
 
     public String formatNumber(){
         String formattedNumber="";
         String number = String.valueOf(this.number);
+        //  1-234-5678
         if (number.length()==8){
             formattedNumber = (String.format("%s-%s-%s",number.substring(0,1),number.substring(1,4),number.substring(4,8)));
+        //  234-5678
         } else if (number.length()==7) {
             formattedNumber = (String.format("%s-%s",number.substring(0,3),number.substring(3,7)));
         }

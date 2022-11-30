@@ -68,11 +68,12 @@ public class Main {
                 case 1:
                     //  VIEW CONTACTS
                     contacts = parseToContacts(dataFile);
-                    System.out.println("Name | Phone number");
-                    System.out.println("---------------");
+                    System.out.printf("%10s | %10s","Name","Number\n");
+                    System.out.println("  ---------------------- ");
                     for (int i = 0; i < contacts.size(); i++){
-                        System.out.println(contacts.get(i).toString());
+                        System.out.println(contacts.get(i).toStringFormatted());
                     }
+                    System.out.println();
                     break;
 
                 case 2:
