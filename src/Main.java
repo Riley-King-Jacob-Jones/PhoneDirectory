@@ -19,7 +19,7 @@ public class Main {
         ArrayList<Contact> contacts = new ArrayList<>();
         for (int i = 0 ; i < lines.size(); i ++ ){
             String[] parts = lines.get(i).split(" ");
-            System.out.printf("%s %s \n", parts[0],parts[1]);
+//            System.out.printf("%s %s \n", parts[0],parts[1]);
             contacts.add(new Contact(parts[0],parts[1]));
         }
         return contacts;
@@ -59,7 +59,7 @@ public class Main {
 
         //  Generate editable list of contact objects
         List<Contact> contacts = parseToContacts(dataFile);
-        contactsToString(contacts);
+//        contactsToString(contacts);
         boolean running = true;
         int choice;
         String choice2;
