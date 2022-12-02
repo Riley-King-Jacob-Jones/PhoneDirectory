@@ -14,7 +14,7 @@ public class Contact {
 
     @Override
     public String toString(){
-        return String.format("%s | %s",this.name, this.number);
+        return String.format("%s %s",this.name, this.number);
     }
 
     public String toStringFormatted(){

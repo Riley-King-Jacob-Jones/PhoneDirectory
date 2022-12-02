@@ -19,7 +19,6 @@ public class Main {
         ArrayList<Contact> contacts = new ArrayList<>();
         for (int i = 0 ; i < lines.size(); i ++ ){
             String[] parts = lines.get(i).split(" ");
-//            System.out.printf("%s %s \n", parts[0],parts[1]);
             contacts.add(new Contact(parts[0],parts[1]));
         }
         return contacts;
@@ -109,7 +108,6 @@ public class Main {
                         }
                         //  If no contact was found
                         if (i == contacts.size()-1 && ! found){
-                            System.out.println("i == contacts.size()");
                             System.out.printf("Sorry no contact named %s was found", choice2);
                         }
                     }
